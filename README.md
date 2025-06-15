@@ -1,5 +1,5 @@
 <div align="center" style="margin-top:20px; margin-bottom:20px;">
-      <img src="Ninkasi.png" alt="Realistic Scenarios" width="500">
+      <img src="https://github.com/noahtournier/ninkasi/blob/315665044413eb285dd162c6f487db996ab644b3/Ninkasi.png" alt="Realistic Scenarios" width="500">
       <p style="font-size:75%;"><em></em></p>
 </div>
 

@@ -1,5 +1,5 @@
 from pywebio.input import input, TEXT, radio
-from pywebio.output import put_table, put_text, put_buttons, clear, put_html, put_scope
+from pywebio.output import put_table, put_buttons, clear, put_html, put_markdown, popup, close_popup, put_row
 from pywebio import start_server
 
 score_labels = ["15", "30", "45", "AV", "GAGNE 🎉"]
@@ -11,7 +11,14 @@ pending_win = None  # Pour stocker temporairement la demande de validation
 def draw_table():
     clear()
 
-    put_html('<h1 style="text-align:center; color:#900C3F;">🎾 Ninkasi 🤟</h1>')
+    clear()
+
+    put_row([
+        put_html('<div style="flex:1"></div>'),  # pousse à droite
+        put_buttons(["📖 Règles"], onclick=[lambda: show_rules()])
+    ])
+
+    put_html('''<h1 style="text-align:center; color:#900C3F;">🎾 Ninkasi 🤟</h1>''')
 
     header = ['Score'] + players
     table = [header]
@@ -66,6 +73,14 @@ def confirm_victory(player):
     pending_win = None
     draw_table()
 
+def show_rules():
+    with open("README.md", "r", encoding="utf-8") as f:
+        rules_md = f.read()
+    popup("📖 Règles du jeu", [
+        put_markdown(rules_md),
+        put_buttons(["Fermer"], onclick=lambda _: close_popup())
+    ])
+
 def main():
     global players, scores, game_wins, pending_win
     p1 = input("Nom du joueur 1 : ", type=TEXT)
@@ -77,5 +92,6 @@ def main():
     pending_win = None
 
     draw_table()
+
 
 start_server(main, port=8080)
